@@ -21,7 +21,7 @@ func TestVideoRepositoryDbInsert(t *testing.T) {
 	video.CreatedAt = time.Now()
 
 	// insert the video into the repository
-	repo := repositories.VideoRepositoryDb(Db: db)
+	repo := repositories.VideoRepositoryDb(db)
 	repo.Insert(video)
 
 	//retrieve the video just inserted above

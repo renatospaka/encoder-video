@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	uuid "github.com/satori/go.uuid"
-	"github.com/sqs/goreturns/returns"
+	_ "github.com/sqs/goreturns/returns"
 )
 
 type VideoRepository interface {
@@ -35,10 +35,10 @@ func (repo VideoRepositoryDb) Insert(video *domain.Video) (*domain.Video, error)
 
 func (repo VideoRepositoryDb) Find(id string) (*domain.Video, error) {
 	var video domain.Video
-	repo.Db.First(&video, where...: "id = ?", id)
+	repo.Db.First(&video, "id = ?", id)
 
-	if video == "" {
-		return nil, fmt.Errorf(format: "Video does not exist.")
+	if video.ID == "" {
+		return nil, fmt.Errorf("Video does not exist.")
 	}
 	return &video, nil
 }
