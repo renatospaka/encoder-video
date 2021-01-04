@@ -25,7 +25,7 @@ func TestVideoRepositoryDbInsert(t *testing.T) {
 	repo.Insert(video)
 
 	//retrieve the video just inserted above
-	v, err : repo.Find(video.ID)
+	v, err := repo.Find(video.ID)
 
 	//test both methods
 	require.NotEmpty(t, v.ID)
