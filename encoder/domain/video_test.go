@@ -6,7 +6,6 @@ import (
 	"time"
 	
 	"github.com/stretchr/testify/require"
-	uuid "github.com/satori/go.uuid"
 )
 
 func TestValidateIfVideoIsEmpty(t *testing.T) {

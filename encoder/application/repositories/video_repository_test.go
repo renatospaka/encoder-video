@@ -21,13 +21,13 @@ func TestVideoRepositoryDbInsert(t *testing.T) {
 	video.CreatedAt = time.Now()
 
 	// insert the video into the repository
-	repo := repositories.VideoRepositoryDb(db)
+	repo := repositories.VideoRepositoryDb{Db:db}
 	repo.Insert(video)
 
 	//retrieve the video just inserted above
 	v, err := repo.Find(video.ID)
 
-	//test both methods
+	//test three ways both methods
 	require.NotEmpty(t, v.ID)
 	require.Nil(t, err)
 	require.Equal(t, v.ID, video.ID)

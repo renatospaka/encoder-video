@@ -4,10 +4,8 @@ import (
 	"encoder/domain"
 	"fmt"
 
-	uuid "github.com/satori/go.uuid"
-	_ "github.com/sqs/goreturns/returns"
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	uuid "github.com/satori/go.uuid"
 )
 
 type VideoRepository interface {
@@ -19,8 +17,8 @@ type VideoRepositoryDb struct {
 	Db *gorm.DB	
 }
 
-func NewVideoRepository(*gorm.DB) *VideoRepositoryDb {
-	return &VideoRepositoryDb{Db}
+func NewVideoRepository(db *gorm.DB) *VideoRepositoryDb {
+	return &VideoRepositoryDb{Db: db}
 }
 
 func (repo VideoRepositoryDb) Insert(video *domain.Video) (*domain.Video, error) {
