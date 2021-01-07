@@ -5,8 +5,8 @@ import (
 	"log"
 
 	"github.com/jinzhu/gorm"
-	_"github.com/jinzhu/gorm/dialects/sqlite"
-	_"github.com/lib/pq"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	_ "github.com/lib/pq"
 )
 
 type Database struct {
@@ -34,7 +34,7 @@ func NewDbTest() *gorm.DB {
 
 	connection, err := dbInstance.Connect()
 	if err != nil {
-		log.Fatalf("Test db error: %w", err)
+		log.Fatalf("Test db error: %v", err)
 	} 
 	return connection
 }
