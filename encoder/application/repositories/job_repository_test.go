@@ -11,10 +11,10 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestVideoRepositoryDbInsert(t *testing.T) {
+func TestJobRepositoryDbInsert(t *testing.T) {
 	db := database.NewDbTest()
 	defer db.Close()
-
+	
 	video := domain.NewVideo()
 	video.ID = uuid.NewV4().String()
 	video.FilePath = "path"
@@ -24,11 +24,17 @@ func TestVideoRepositoryDbInsert(t *testing.T) {
 	repo := repositories.VideoRepositoryDb{Db: db}
 	repo.Insert(video)
 
-	//retrieve the video just inserted above
-	v, err := repo.Find(video.ID)
-
-	//test three ways both methods
-	require.NotEmpty(t, v.ID)
+	job, err := domain.NewJob("output_path", "Pending", video)
 	require.Nil(t, err)
-	require.Equal(t, v.ID, video.ID)
+	
+	// insert the job into the repository
+	repoJob := repositories.JobRepositoryDb{Db:db}
+	repoJob.Insert(job)
+
+	//retrieve the job just inserted above
+	j, err := repoJob.Find(job.ID)
+	require.NotEmpty(t, j.ID)
+	require.Nil(t, err)
+	require.Equal(t, j.ID, job.ID)
+	require.Equal(t, j.VideoID, video.ID)
 }
